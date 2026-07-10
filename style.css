@@ -1,4 +1,41 @@
-*{
+.track{
+display:flex;
+gap:10px;
+transition:transform 3s ease-out;
+}
+
+.item{
+min-width:90px;
+height:90px;
+background:#2d2d2d;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+font-weight:bold;
+color:white;
+}
+
+.roulette{
+overflow:hidden;
+width:320px;
+margin:20px auto;
+border:3px solid #00aaff;
+border-radius:10px;
+position:relative;
+}
+
+.pointer{
+position:absolute;
+left:50%;
+top:0;
+transform:translateX(-50%);
+width:4px;
+height:100%;
+background:red;
+z-index:10;
+}*{
     margin:0;
     padding:0;
     box-sizing:border-box;
