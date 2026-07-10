@@ -3,113 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keys ochish</title>
 
-<style>
-body{
-    margin:0;
-    background:#121212;
-    font-family:Arial,sans-serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    color:#fff;
-}
+<title>Keys WebApp</title>
 
-.box{
-    width:320px;
-    background:#1f1f1f;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 0 20px rgba(0,0,0,.4);
-}
-
-h2{
-    margin-bottom:20px;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
-    margin-bottom:15px;
-    box-sizing:border-box;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#0099ff;
-    color:#fff;
-    font-size:17px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#0077cc;
-}
-
-#result{
-    margin-top:15px;
-    font-size:18px;
-    font-weight:bold;
-}
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h2>🎁 Keys ochish</h2>
+<div class="balance">
+💎 Balans:
+<span id="balance">1000</span>
+</div>
 
-<input type="text" id="key" placeholder="Key kiriting">
+<div class="case">
 
-<button onclick="checkKey()">Ochish</button>
+<h2>📦 Bronze Case</h2>
 
-<div id="result"></div>
+<img src="https://cdn-icons-png.flaticon.com/512/869/869636.png">
+
+<div class="price">
+Narxi: 100 💎
+</div>
+
+<button onclick="openCase()">
+📦 OCHISH
+</button>
+
+<div class="result" id="result">
 
 </div>
 
-<script>
+</div>
 
-async function checkKey(){
+</div>
 
-const key=document.getElementById("key").value.trim();
-
-if(!key){
-document.getElementById("result").innerHTML="⚠️ Key kiriting";
-return;
-}
-
-try{
-
-const response=await fetch("/api/check?key="+encodeURIComponent(key));
-
-const data=await response.json();
-
-if(data.success){
-document.getElementById("result").innerHTML="✅ "+data.message;
-}else{
-document.getElementById("result").innerHTML="❌ "+data.message;
-}
-
-}catch(error){
-
-document.getElementById("result").innerHTML="⚠️ Server bilan bog'lanib bo'lmadi";
-
-}
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
