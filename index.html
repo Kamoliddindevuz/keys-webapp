@@ -7,60 +7,67 @@
 
 <style>
 body{
-font-family:Arial,sans-serif;
-background:#121212;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
+    margin:0;
+    background:#121212;
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:#fff;
 }
 
 .box{
-background:#1f1f1f;
-padding:25px;
-border-radius:15px;
-width:320px;
-text-align:center;
-box-shadow:0 0 20px rgba(0,0,0,.4);
+    width:320px;
+    background:#1f1f1f;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+h2{
+    margin-bottom:20px;
 }
 
 input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:none;
-border-radius:8px;
-font-size:16px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    margin-bottom:15px;
+    box-sizing:border-box;
 }
 
 button{
-width:100%;
-padding:12px;
-background:#0099ff;
-color:white;
-border:none;
-border-radius:8px;
-font-size:18px;
-cursor:pointer;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#0099ff;
+    color:#fff;
+    font-size:17px;
+    cursor:pointer;
 }
 
 button:hover{
-background:#0077cc;
+    background:#0077cc;
 }
 
 #result{
-margin-top:15px;
-font-size:18px;
-font-weight:bold;
+    margin-top:15px;
+    font-size:18px;
+    font-weight:bold;
 }
 </style>
 
 </head>
+
 <body>
 
 <div class="box">
+
 <h2>🎁 Keys ochish</h2>
 
 <input type="text" id="key" placeholder="Key kiriting">
@@ -68,20 +75,40 @@ font-weight:bold;
 <button onclick="checkKey()">Ochish</button>
 
 <div id="result"></div>
+
 </div>
 
 <script>
-function checkKey(){
 
-let key=document.getElementById("key").value;
+async function checkKey(){
 
-if(key=="123456"){
-document.getElementById("result").innerHTML="✅ Key qabul qilindi!";
+const key=document.getElementById("key").value.trim();
+
+if(!key){
+document.getElementById("result").innerHTML="⚠️ Key kiriting";
+return;
+}
+
+try{
+
+const response=await fetch("/api/check?key="+encodeURIComponent(key));
+
+const data=await response.json();
+
+if(data.success){
+document.getElementById("result").innerHTML="✅ "+data.message;
 }else{
-document.getElementById("result").innerHTML="❌ Noto'g'ri key!";
+document.getElementById("result").innerHTML="❌ "+data.message;
+}
+
+}catch(error){
+
+document.getElementById("result").innerHTML="⚠️ Server bilan bog'lanib bo'lmadi";
+
 }
 
 }
+
 </script>
 
 </body>
