@@ -47,7 +47,7 @@ return;
 balance -= data.price;
 updateBalance();
 
-const prize = randomReward(data.rewards);
+const prize = getRandomReward(type);
 
 const track = document.getElementById("track");
 const items = track.querySelectorAll(".item");
