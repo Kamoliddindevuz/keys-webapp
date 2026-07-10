@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Keys WebApp</title>
 
 <link rel="stylesheet" href="style.css">
@@ -13,30 +13,51 @@
 
 <div class="container">
 
-<div class="balance">
-💎 Balans:
-<span id="balance">1000</span>
-</div>
+    <div class="balance">
+        💎 Balans:
+        <span id="balance">1000</span>
+    </div>
 
-<div class="case">
+    <div class="case">
 
-<h2>📦 Bronze Case</h2>
+        <h2>📦 Bronze Case</h2>
 
-<img src="https://cdn-icons-png.flaticon.com/512/869/869636.png">
+        <img src="https://cdn-icons-png.flaticon.com/512/869/869636.png">
 
-<div class="price">
-Narxi: 100 💎
-</div>
+        <div class="price">
+            Narxi: 100 💎
+        </div>
 
-<button onclick="openCase()">
-📦 OCHISH
-</button>
+        <div class="roulette">
 
-<div class="result" id="result">
+            <div class="pointer"></div>
 
-</div>
+            <div class="track" id="track">
 
-</div>
+                <div class="item">💎10</div>
+                <div class="item">💎20</div>
+                <div class="item">💎50</div>
+                <div class="item">💎100</div>
+                <div class="item">💎250</div>
+                <div class="item">💎500</div>
+                <div class="item">💎50</div>
+                <div class="item">💎20</div>
+                <div class="item">💎100</div>
+                <div class="item">💎250</div>
+                <div class="item">💎500</div>
+                <div class="item">💎10</div>
+
+            </div>
+
+        </div>
+
+        <button onclick="openCase()">
+            📦 OCHISH
+        </button>
+
+        <div class="result" id="result"></div>
+
+    </div>
 
 </div>
 
