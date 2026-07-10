@@ -1,63 +1,136 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Keys WebApp</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="balance">
-        💎 Balans:
-        <span id="balance">1000</span>
-    </div>
+<header>
 
-    <div class="case">
+<div class="logo">
+💎 KEYS WEBAPP
+</div>
 
-        <h2>📦 Bronze Case</h2>
+<div class="balance">
 
-        <img src="https://cdn-icons-png.flaticon.com/512/869/869636.png">
+<span>Balans</span>
 
-        <div class="price">
-            Narxi: 100 💎
-        </div>
+<h2 id="balance">1000 💎</h2>
 
-        <div class="roulette">
+</div>
 
-            <div class="pointer"></div>
+</header>
 
-            <div class="track" id="track">
+<section class="cases">
 
-                <div class="item">💎10</div>
-                <div class="item">💎20</div>
-                <div class="item">💎50</div>
-                <div class="item">💎100</div>
-                <div class="item">💎250</div>
-                <div class="item">💎500</div>
-                <div class="item">💎50</div>
-                <div class="item">💎20</div>
-                <div class="item">💎100</div>
-                <div class="item">💎250</div>
-                <div class="item">💎500</div>
-                <div class="item">💎10</div>
+<div class="case bronze">
 
-            </div>
+<img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
 
-        </div>
+<h2>Bronze Case</h2>
 
-        <button onclick="openCase()">
-            📦 OCHISH
-        </button>
+<p>100 💎</p>
 
-        <div class="result" id="result"></div>
+<button onclick="openCase('bronze')">
+OCHISH
+</button>
 
-    </div>
+</div>
+
+<div class="case silver">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
+
+<h2>Silver Case</h2>
+
+<p>500 💎</p>
+
+<button onclick="openCase('silver')">
+OCHISH
+</button>
+
+</div>
+
+<div class="case gold">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
+
+<h2>Gold Case</h2>
+
+<p>1000 💎</p>
+
+<button onclick="openCase('gold')">
+OCHISH
+</button>
+
+</div>
+
+</section>
+
+<section class="roulette">
+
+<div class="pointer"></div>
+
+<div id="track" class="track">
+    <div class="item">💎10</div>
+<div class="item">💎20</div>
+<div class="item">💎30</div>
+<div class="item">💎50</div>
+<div class="item">💎80</div>
+<div class="item">💎100</div>
+<div class="item">💎150</div>
+<div class="item">💎250</div>
+<div class="item">💎500</div>
+
+<div class="item">💎10</div>
+<div class="item">💎20</div>
+<div class="item">💎30</div>
+<div class="item">💎50</div>
+<div class="item">💎80</div>
+<div class="item">💎100</div>
+<div class="item">💎150</div>
+<div class="item">💎250</div>
+<div class="item">💎500</div>
+
+</div>
+
+</section>
+
+<section class="result">
+
+<h2 id="result">
+
+Case ochishga tayyor
+
+</h2>
+
+</section>
+
+<footer>
+
+<button class="inventory">
+
+🎒 Inventar
+
+</button>
+
+<button class="profile">
+
+👤 Profil
+
+</button>
+
+</footer>
 
 </div>
 
