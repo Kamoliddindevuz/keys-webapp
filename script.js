@@ -35,54 +35,47 @@ function randomReward(arr){
 return arr[Math.floor(Math.random()*arr.length)];
 
 }
+async function openCase(type){
 
-function openCase(type){
+const data = cases[type];
 
-const data=cases[type];
-
-if(balance<data.price){
-
-document.getElementById("result").innerHTML=
-"❌ Balans yetarli emas";
-
+if(balance < data.price){
+document.getElementById("result").innerHTML="❌ Balans yetarli emas";
 return;
-
 }
 
-balance-=data.price;
-
+balance -= data.price;
 updateBalance();
 
-const prize=randomReward(data.rewards);
+const prize = randomReward(data.rewards);
 
-const track=document.getElementById("track");
+const track = document.getElementById("track");
+const items = track.querySelectorAll(".item");
+
+const index = Math.floor(Math.random()*items.length);
+
+items[index].innerHTML = "💎"+prize;
 
 track.style.transition="none";
-
 track.style.transform="translateX(0px)";
-    setTimeout(()=>{
 
-const items=document.querySelectorAll(".item");
+setTimeout(()=>{
+    track.style.transition="transform 4s cubic-bezier(.15,.8,.2,1)";
 
-const index=Math.floor(Math.random()*items.length);
-
-const move=(index*110)-160;
-
-track.style.transition="transform 3s cubic-bezier(.17,.67,.19,1)";
+const move = (index*120)+60;
 
 track.style.transform=`translateX(-${move}px)`;
 
-},100);
-
 setTimeout(()=>{
 
-balance+=prize;
-
+balance += prize;
 updateBalance();
 
 document.getElementById("result").innerHTML=
-"🎉 Siz yutdingiz<br><br>💎 "+prize;
+`🎉 Siz yutdingiz<br><br>💎 ${prize}`;
 
-},3200);
+},4200);
+
+},50);
 
 }
