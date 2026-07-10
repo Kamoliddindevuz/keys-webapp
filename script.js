@@ -1,25 +1,43 @@
 let balance = 1000;
 
-const prizes = [
-10,20,30,50,75,100,150,250
-];
+const prizes = [10,20,50,100,250,500];
 
 function openCase(){
 
-if(balance<100){
-document.getElementById("result").innerHTML="❌ Balans yetarli emas";
-return;
-}
+    if(balance < 100){
+        document.getElementById("result").innerHTML="❌ Balans yetarli emas";
+        return;
+    }
 
-balance-=100;
+    balance -= 100;
 
-const prize=prizes[Math.floor(Math.random()*prizes.length)];
+    const track = document.getElementById("track");
 
-balance+=prize;
+    track.style.transition="none";
+    track.style.transform="translateX(0px)";
 
-document.getElementById("balance").innerHTML=balance;
+    setTimeout(()=>{
 
-document.getElementById("result").innerHTML=
-"🎉 Siz yutdingiz <br><br> 💎 "+prize;
+        const prize = prizes[Math.floor(Math.random()*prizes.length)];
+
+        const index = prizes.indexOf(prize);
+
+        const move = (index*100)-150;
+
+        track.style.transition="transform 3s cubic-bezier(.17,.67,.19,1)";
+        track.style.transform=`translateX(-${move}px)`;
+
+        setTimeout(()=>{
+
+            balance += prize;
+
+            document.getElementById("balance").innerHTML=balance;
+
+            document.getElementById("result").innerHTML=
+            "🎉 Siz yutdingiz <br><br> 💎 "+prize;
+
+        },3000);
+
+    },100);
 
 }
