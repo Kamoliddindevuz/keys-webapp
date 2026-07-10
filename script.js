@@ -46,7 +46,7 @@ return;
 
 balance -= data.price;
 updateBalance();
-
+buildRoulette(type);
 const prize = getRandomReward(type);
 
 const track = document.getElementById("track");
@@ -67,7 +67,7 @@ const move = (index*120)+60;
 track.style.transform=`translateX(-${move}px)`;
 
 setTimeout(()=>{
-
+spinRoulette(prize);
 balance += prize;
 updateBalance();
 
