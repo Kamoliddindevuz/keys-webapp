@@ -94,46 +94,39 @@ window.addEventListener("load", () => {
 
 function showInventory(){
 
-    if(inventory.length===0){
+const modal=document.getElementById("inventoryModal");
+const list=document.getElementById("inventoryList");
 
-        alert("🎒 Inventar bo'sh");
+list.innerHTML="";
 
-        return;
+if(inventory.length===0){
 
-    }
+list.innerHTML="<p>📦 Inventar bo'sh</p>";
 
-    let text="🎒 INVENTAR\n\n";
+}else{
 
-    inventory.forEach((item,index)=>{
+inventory.forEach((item,index)=>{
 
-        text+=`${index+1}. 💎 ${item.reward}\n${item.time}\n\n`;
-
-    });
-
-    alert(text);
-
-}
-
-const inventoryBtn=document.querySelector(".inventory");
-
-if(inventoryBtn){
-
-inventoryBtn.addEventListener("click",showInventory);
-
-}
-
-const profileBtn=document.querySelector(".profile");
-
-if(profileBtn){
-
-profileBtn.addEventListener("click",()=>{
-
-alert(
-"👤 Profil\n\n"+
-"💎 Balans: "+balance+"\n"+
-"🎁 Inventar: "+inventory.length+" ta"
-);
+list.innerHTML+=`
+<div class="inv-item">
+<b>#${index+1}</b><br>
+💎 ${item.reward}<br>
+🕒 ${item.time}
+</div>
+`;
 
 });
 
 }
+
+modal.style.display="flex";
+
+}
+
+function closeInventory(){
+
+document.getElementById("inventoryModal").style.display="none";
+
+} 
+window.showInventory = showInventory;
+window.closeInventory = closeInventory;
