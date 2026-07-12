@@ -1,154 +1,183 @@
-let balance = Number(localStorage.getItem("balance")) || 1000;
+let balance = 1000;
+let inventory = [];
 
-let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+const cases = {
+    bronze: {
+        price: 100,
+        rewards: [10,20,50,100,150,250,500]
+    },
+    silver: {
+        price: 500,
+        rewards: [100,250,500,750,1000,1500]
+    },
+    gold: {
+        price: 1000,
+        rewards: [500,1000,1500,2000,5000]
+    }
+};
+
+function updateBalance(){
+    document.getElementById("balance").innerHTML = balance + " 💎";
+}
+
+function randomReward(type){
+
+    const rewards = cases[type].rewards;
+
+    return rewards[Math.floor(Math.random()*rewards.length)];
+
+}
 
 updateBalance();
 
-function updateBalance() {
-    document.getElementById("balance").innerHTML = balance + " 💎";
-    localStorage.setItem("balance", balance);
-}
+function openCase(type){
 
-function saveInventory() {
-    localStorage.setItem("inventory", JSON.stringify(inventory));
-}
+    const data = cases[type];
 
-function addInventory(prize) {
-    inventory.push({
-        reward: prize,
-        time: new Date().toLocaleString()
-    });
+    if(balance < data.price){
 
-    saveInventory();
-}
-
-async function openCase(type) {
-
-    const data = CASES[type];
-
-    if (!data) {
-        document.getElementById("result").innerHTML =
-        "❌ Case topilmadi";
-        return;
-    }
-
-    if (balance < data.price) {
         document.getElementById("result").innerHTML =
         "❌ Balans yetarli emas";
+
         return;
+
     }
 
     balance -= data.price;
 
     updateBalance();
 
-    buildRoulette(type);
+    const prize = randomReward(type);
+        buildRoulette(type);
 
-    const prize = getRandomReward(type);
-        spinRoulette(prize);
+    spinRoulette();
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
         balance += prize;
 
+        inventory.push({
+            reward: prize,
+            date: new Date().toLocaleString()
+        });
+
         updateBalance();
 
-        addInventory(prize);
-
         document.getElementById("result").innerHTML =
-        `🎉 Siz yutdingiz<br><br>💎 ${prize}`;
+        `🎉 Siz yutdingiz <br><br> 💎 ${prize}`;
 
-    }, 5200);
-
-}
-
-function resetBalance(){
-
-    balance = 1000;
-
-    updateBalance();
+    },4000);
 
 }
 
-function clearInventory(){
+function buildRoulette(type){
 
-    inventory = [];
+    const track=document.getElementById("track");
 
-    saveInventory();
+    track.innerHTML="";
 
-}
+    const rewards=cases[type].rewards;
 
-window.openCase = openCase;
-window.resetBalance = resetBalance;
-window.clearInventory = clearInventory;
-window.addEventListener("load", () => {
+    for(let i=0;i<40;i++){
 
-    updateBalance();
+        const value=rewards[Math.floor(Math.random()*rewards.length)];
 
-    if(document.getElementById("result")){
-        document.getElementById("result").innerHTML =
-        "🎁 Case ochishga tayyor";
+        track.innerHTML += `
+        <div class="item">
+            💎${value}
+        </div>`;
     }
 
-});
+}
+function spinRoulette(){
+
+    const track = document.getElementById("track");
+
+    track.style.transition = "none";
+    track.style.transform = "translateX(0px)";
+
+    setTimeout(()=>{
+
+        const move = Math.floor(Math.random()*1800)+1200;
+
+        track.style.transition =
+        "transform 4s cubic-bezier(.15,.8,.2,1)";
+
+        track.style.transform =
+        `translateX(-${move}px)`;
+
+    },50);
+
+}
 
 function showInventory(){
 
-const modal=document.getElementById("inventoryModal");
-const list=document.getElementById("inventoryList");
+    let list = document.getElementById("inventoryList");
 
-list.innerHTML="";
+    list.innerHTML = "";
 
-if(inventory.length===0){
+    if(inventory.length===0){
 
-list.innerHTML="<p>📦 Inventar bo'sh</p>";
+        list.innerHTML="<p>📦 Inventar bo'sh</p>";
 
-}else{
+    }else{
 
-inventory.forEach((item,index)=>{
+        inventory.forEach((item,index)=>{
 
-list.innerHTML+=`
-<div class="inv-item">
-<b>#${index+1}</b><br>
-💎 ${item.reward}<br>
-🕒 ${item.time}
-</div>
-`;
+            list.innerHTML += `
+            <div class="inv-item">
+                <b>#${index+1}</b><br>
+                💎 ${item.reward}<br>
+                🕒 ${item.date}
+            </div>`;
+        });
 
-});
+    }
 
-}
-
-modal.style.display="flex";
+    document.getElementById("inventoryModal").style.display="flex";
 
 }
 
 function closeInventory(){
 
-document.getElementById("inventoryModal").style.display="none";
+    document.getElementById("inventoryModal").style.display="none";
 
-} 
-window.showInventory = showInventory;
-window.closeInventory = closeInventory;
+}
+
 function showProfile(){
 
-const info=document.getElementById("profileInfo");
+    document.getElementById("profileInfo").innerHTML = `
+    <p><b>👤 Foydalanuvchi:</b> Mehmon</p>
+    <p><b>💎 Balans:</b> ${balance}</p>
+    <p><b>🎒 Inventar:</b> ${inventory.length} ta</p>
+    `;
 
-info.innerHTML=`
-<p><b>💎 Balans:</b> ${balance}</p>
-<p><b>🎒 Inventar:</b> ${inventory.length} ta</p>
-<p><b>🆔 ID:</b> ${Math.abs(balance*37+inventory.length)}</p>
-`;
-
-document.getElementById("profileModal").style.display="flex";
+    document.getElementById("profileModal").style.display="flex";
 
 }
 
 function closeProfile(){
 
-document.getElementById("profileModal").style.display="none";
+    document.getElementById("profileModal").style.display="none";
 
 }
 
-window.showProfile=showProfile;
-window.closeProfile=closeProfile;
+function dailyReward(){
+
+    balance += 100;
+
+    updateBalance();
+
+    document.getElementById("result").innerHTML =
+    "🎁 Daily Bonus: +100 💎";
+
+}
+
+window.openCase = openCase;
+window.showInventory = showInventory;
+window.closeInventory = closeInventory;
+window.showProfile = showProfile;
+window.closeProfile = closeProfile;
+window.dailyReward = dailyReward;
+
+updateBalance();
