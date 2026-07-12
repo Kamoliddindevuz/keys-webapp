@@ -130,3 +130,25 @@ document.getElementById("inventoryModal").style.display="none";
 } 
 window.showInventory = showInventory;
 window.closeInventory = closeInventory;
+function showProfile(){
+
+const info=document.getElementById("profileInfo");
+
+info.innerHTML=`
+<p><b>💎 Balans:</b> ${balance}</p>
+<p><b>🎒 Inventar:</b> ${inventory.length} ta</p>
+<p><b>🆔 ID:</b> ${Math.abs(balance*37+inventory.length)}</p>
+`;
+
+document.getElementById("profileModal").style.display="flex";
+
+}
+
+function closeProfile(){
+
+document.getElementById("profileModal").style.display="none";
+
+}
+
+window.showProfile=showProfile;
+window.closeProfile=closeProfile;
