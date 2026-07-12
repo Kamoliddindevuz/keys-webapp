@@ -127,14 +127,25 @@ function closeProfile() {
 
 function dailyReward() {
 
-    if (spinning) return;
+    const today = new Date().toDateString();
+    const lastReward = localStorage.getItem("lastReward");
+
+    if (lastReward === today) {
+
+        document.getElementById("result").innerHTML =
+        "⏳ Siz bugungi bonusni olib bo'lgansiz.";
+
+        return;
+    }
 
     balance += 100;
 
     updateBalance();
 
+    localStorage.setItem("lastReward", today);
+
     document.getElementById("result").innerHTML =
-    "🎁 Daily Bonus +100 💎";
+    "🎁 Bugungi bonus: +100 💎";
 
 }
 window.openCase = openCase;
