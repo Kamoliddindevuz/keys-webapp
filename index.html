@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
 
 <meta charset="UTF-8">
@@ -11,7 +12,9 @@
 
 </head>
 
-<body> 
+<body>
+
+<div class="background"></div>
 
 <div class="container">
 
@@ -19,6 +22,24 @@
 
 <div class="logo">
 💎 KEYS WEBAPP
+</div>
+
+<div class="user-panel">
+
+<div class="user">
+
+<div class="avatar">
+👤
+</div>
+
+<div>
+
+<h3 id="username">Mehmon</h3>
+
+<p>ID: <span id="userid">100001</span></p>
+
+</div>
+
 </div>
 
 <div class="balance">
@@ -29,78 +50,70 @@
 
 </div>
 
+</div>
+
 </header>
+
+<section class="menu">
+
+<button>🏠 Home</button>
+
+<button>📦 Cases</button>
+
+<button>🎒 Inventory</button>
+
+<button>👤 Profile</button>
+
+</section>
 
 <section class="cases">
 
 <div class="case bronze">
 
-<img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
-
-<h2>Bronze Case</h2>
+<h2>🥉 Bronze Case</h2>
 
 <p>100 💎</p>
 
 <button onclick="openCase('bronze')">
-OCHISH
+OPEN
 </button>
 
 </div>
 
 <div class="case silver">
 
-<img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
-
-<h2>Silver Case</h2>
+<h2>🥈 Silver Case</h2>
 
 <p>500 💎</p>
 
 <button onclick="openCase('silver')">
-OCHISH
+OPEN
 </button>
 
 </div>
 
 <div class="case gold">
 
-<img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png">
-
-<h2>Gold Case</h2>
+<h2>🥇 Gold Case</h2>
 
 <p>1000 💎</p>
 
 <button onclick="openCase('gold')">
-OCHISH
+OPEN
 </button>
 
 </div>
-
-</section>
-
 <section class="roulette">
+
+<h2>🎰 Lucky Spin</h2>
+
+<div class="roulette-box">
 
 <div class="pointer"></div>
 
 <div id="track" class="track">
-    <div class="item">💎10</div>
-<div class="item">💎20</div>
-<div class="item">💎30</div>
-<div class="item">💎50</div>
-<div class="item">💎80</div>
-<div class="item">💎100</div>
-<div class="item">💎150</div>
-<div class="item">💎250</div>
-<div class="item">💎500</div>
 
-<div class="item">💎10</div>
-<div class="item">💎20</div>
-<div class="item">💎30</div>
-<div class="item">💎50</div>
-<div class="item">💎80</div>
-<div class="item">💎100</div>
-<div class="item">💎150</div>
-<div class="item">💎250</div>
-<div class="item">💎500</div>
+</div>
 
 </div>
 
@@ -109,56 +122,62 @@ OCHISH
 <section class="result">
 
 <h2 id="result">
-
-Case ochishga tayyor
-
+🎁 Case ochishga tayyor
 </h2>
 
 </section>
 
 <footer>
 
-<button class="inventory" onclick="showInventory()">
+<button onclick="showInventory()">
 🎒 Inventar
 </button>
 
-<button class="profile" onclick="showProfile()">
+<button onclick="showProfile()">
+👤 Profil
+</button>
+
+<button onclick="dailyReward()">
+🎁 Bonus
 </button>
 
 </footer>
 
 </div>
 
-    <div id="inventoryModal" class="modal">
-    <div class="modal-box">
+<div id="inventoryModal" class="modal">
 
-        <h2>🎒 Inventar</h2>
+<div class="modal-box">
 
-        <div id="inventoryList"></div>
+<h2>🎒 Inventar</h2>
 
-        <button onclick="closeInventory()">Yopish</button>
+<div id="inventoryList"></div>
 
-    </div>
-    </div>
-    </div>
+<button onclick="closeInventory()">
+Yopish
+</button>
 
-<div id="profileModal" class="modal">
-    <div class="modal-box">
-
-        <h2>👤 Profil</h2>
-
-        <div id="profileInfo"></div>
-
-        <button onclick="closeProfile()">Yopish</button>
-
-    </div>
 </div>
 
-<script src="data.js"></script>
-<script src="roulette.js"></script>
+</div>
+
+<div id="profileModal" class="modal">
+
+<div class="modal-box">
+
+<h2>👤 Profil</h2>
+
+<div id="profileInfo"></div>
+
+<button onclick="closeProfile()">
+Yopish
+</button>
+
+</div>
+
+</div>
+
 <script src="script.js"></script>
-    <script src="data.js"></script>
-<script src="roulette.js"></script>
-<script src="script.js"></script>
+
 </body>
 </html>
